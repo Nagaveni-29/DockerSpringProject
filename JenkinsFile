@@ -15,5 +15,20 @@ pipeline{
                 sh 'mvn clean install -D skipTests=true'
             }
         }
+	stage("jfrog"){
+            steps{
+                rtUpload(
+                    serverId: 'jfrog',
+                    spec: '''{
+                        "files": [
+                            {
+                                "pattern": "**/**/*.*ar",
+                                "target": "project/"
+                            }
+                        ]
+                    }'''
+                )
+            }
+        }
     }
 }
