@@ -39,5 +39,21 @@ pipeline{
                 )
             }
         }
+		stage('Docker') {
+            steps {
+                dir("frontend") {   
+                    sh 'docker build -t frontend:latest .'   
+                }
+                dir("backend") { 
+                    sh 'docker build -t backend:latest .' 
+                }
+            }
+        }
+        stage('run') {
+            steps {
+                sh 'docker run -p 8085:8080 -d backend:latest'
+                sh 'docker run -p 8084:8080 -d frontend:latest'
+            }
+        }
     }
 }
