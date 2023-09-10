@@ -13,8 +13,15 @@ pipeline{
         stage('install'){
             steps{
                 sh 'mvn clean install -D skipTests=true'
+		
             }
         }
+	stage('sonar'){
+		steps{
+			sh 'mvn clean install sonar:sonar'
+			}
+		}
+
 	stage("jfrog"){
             steps{
                 rtUpload(
