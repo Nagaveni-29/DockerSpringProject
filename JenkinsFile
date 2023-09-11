@@ -36,6 +36,18 @@ pipeline{
                 )
             }
         }
+       stage('dockerbuild'){
+	    steps{
+  	            dir("backend"){
+        	       sh 'docker build -t nagavenidoddamani/backend:latest .'
+                	}
+		    }
+	   steps{
+                dir("frontend"){
+                  sh 'docker build -t nagavenidoddamani/frontend:latest .'
+			        }
+            }
+    }
      }
 }
 	
