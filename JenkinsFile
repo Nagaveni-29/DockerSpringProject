@@ -39,21 +39,19 @@ pipeline{
                 )
             }
         }
-		stage('Docker') {
-            steps {
-                dir("frontend") {   
-                    sh 'docker build -t frontend:latest .'   
-                }
-                dir("backend") { 
-                    sh 'docker build -t backend:latest .' 
-                }
-            }
+			stage('Clone repository') {
+        git credentialsId: 'git', url: 'https://github.com/Nagaveni-29/DockerSpringProject/blob/main/backend/Dockerfile','https://github.com/Nagaveni-29/DockerSpringProject/tree/main/frontend/Dockerfile'
+    }
+    
+    stage('Build image') {
+       dockerImage = docker.build("nagavenidoddamani/frontend:latest","nagavenidoddamani/backend:latest")
+    }
+
+    
+ stage('Push image') {
+        withDockerRegistry([ credentialsId: "dockerhubaccount", url: "https://hub.docker.com/u/nagavenidoddamani" ]) {
+        dockerImage.push()
         }
-        stage('run') {
-            steps {
-                sh 'docker run -p 8085:8080 -d backend:latest'
-                sh 'docker run -p 8084:8080 -d frontend:latest'
-            }
-        }
+    } 
     }
 }
