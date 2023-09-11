@@ -57,7 +57,7 @@ pipeline{
                     sh 'docker push nagavenidoddamani/frontend:latest'
                 }
             }
-        }
+        
     }
 }
 
