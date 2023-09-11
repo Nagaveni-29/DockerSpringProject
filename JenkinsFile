@@ -41,7 +41,8 @@ pipeline{
         }
 	  stage("Clone repository") {
                                 steps{
-        git credentialsId: 'git', url: 'https://github.com/Nagaveni-29/DockerSpringProject/blob/main/backend/Dockerfile','https://github.com/Nagaveni-29/DockerSpringProject/tree/main/frontend/Dockerfile'
+		   git credentialsId: 'git', url: 'https://github.com/Nagaveni-29/DockerSpringProject/blob/main/backend/Dockerfile'
+                   git credentialsId: 'git', url: 'https://github.com/Nagaveni-29/DockerSpringProject/tree/main/frontend/Dockerfile'
                                }
                         }
         stage("Build image") {
