@@ -49,7 +49,7 @@ pipeline{
 	 stage('dockerpush'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'pwd', usernameVariable: 'user')]){
-                    sh 'docker login -u nagavenidoddamani -p ${pwd}'
+                    sh 'docker login -u ${user} -p ${pwd}'
                     sh 'docker push nagavenidoddamani/backend:latest'
                     sh 'docker push nagavenidoddamani/frontend:latest'
                 }
