@@ -47,16 +47,20 @@ pipeline{
                         }
         stage("Build image") {
     steps{
+	scripts{
         dockerImageFrontend = docker.build("nagavenidoddamani/frontend:latest", "https://github.com/Nagaveni-29/DockerSpringProject/blob/main/backend/Dockerfile")
         dockerImageBackend = docker.build("nagavenidoddamani/backend:latest", "https://github.com/Nagaveni-29/DockerSpringProject/blob/main/frontend/Dockerfile")
     }
+	}
 }
         stage("Push image"){
     steps{
+	scripts{
         withDockerRegistry([ credentialsId: "dockerhubaccount", url: "https://hub.docker.com/u/nagavenidoddamani" ]) {
             dockerImageFrontend.push()
             dockerImageBackend.push()
         }
+}
     }
 }
     }
