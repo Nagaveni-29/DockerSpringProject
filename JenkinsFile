@@ -21,6 +21,21 @@ pipeline{
 			}
 		}
 	}
+	stage("jfrog"){
+            steps{
+                rtUpload(
+                    serverId: 'jfrog',
+                    spec: '''{
+                        "files": [
+                            {
+                                "pattern": "**/**/*.*ar",
+                                "target": "project/"
+                            }
+                        ]
+                    }'''
+                )
+            }
+        }
      }
 }
 	
