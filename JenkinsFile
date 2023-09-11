@@ -14,27 +14,7 @@ pipeline{
                 sh 'mvn clean install -D skipTests=true'
             }
         }
-	stage('sonar'){
-		steps{
-			withSonarQubeEnv('sonar'){
-			sh 'mvn clean install sonar:sonar'				
-			}
-		}
-	}
-	stage("jfrog"){
-            steps{
-                rtUpload(
-                    serverId: 'jfrog',
-                    spec: '''{
-                        "files": [
-                            {
-                                "pattern": "**/**/*.*ar",
-                                "target": "project/"
-                            }
-                        ]
-                    }'''
-                )
-            }
-        }
-     }
+     }
 }
+	
+
