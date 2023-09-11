@@ -39,19 +39,26 @@ pipeline{
                 )
             }
         }
-			stage('Clone repository') {
+			stage("Clone repository") {
+				steps{
         git credentialsId: 'git', url: 'https://github.com/Nagaveni-29/DockerSpringProject/blob/main/backend/Dockerfile','https://github.com/Nagaveni-29/DockerSpringProject/tree/main/frontend/Dockerfile'
     }
+}
     
-    stage('Build image') {
+    stage("Build image") {
+	steps{
        dockerImage = docker.build("nagavenidoddamani/frontend:latest","nagavenidoddamani/backend:latest")
     }
+}
 
     
- stage('Push image') {
+ stage("Push image"){ 
+     	steps{
         withDockerRegistry([ credentialsId: "dockerhubaccount", url: "https://hub.docker.com/u/nagavenidoddamani" ]) {
         dockerImage.push()
         }
+	}
     } 
     }
 }
+
