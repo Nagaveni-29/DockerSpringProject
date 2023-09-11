@@ -48,13 +48,13 @@ pipeline{
     }
 	 stage('docker push'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'pwd', usernameVariable: 'user')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'pwd', usernameVariable: 'user')]){
                     sh 'docker login -u nagavenidoddamani -p nagaveni2911@'
                     sh 'docker push nagavenidoddamani/backend:latest'
                     sh 'docker push nagavenidoddamani/frontend:latest'
                 }
             }
-          }
+        }
     }
 }
 	
