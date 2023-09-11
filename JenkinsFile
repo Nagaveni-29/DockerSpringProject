@@ -46,7 +46,7 @@ pipeline{
 			        }
             }
     }
-	 stage('docker push'){
+	 stage('dockerpush'){
             steps{
                 withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'pwd', usernameVariable: 'user')]){
                     sh 'docker login -u nagavenidoddamani -p ${pwd}'
